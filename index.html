@@ -129,7 +129,7 @@ main{max-width:1500px;margin:0 auto;padding-bottom:calc(30px + env(safe-area-ins
 .dtag.gray{color:var(--ink2);background:#EFEFF3}.dtag.on{color:#3F7A4F;background:#E5F2E6}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:12px;margin:0 14px}
 .tcard{overflow:hidden;display:block}.tcard svg{display:block;width:100%;height:auto}.tcard .ft{display:flex;justify-content:space-between;align-items:center;gap:6px;padding:9px 10px 10px;font-size:12px;color:var(--ink2)}
-.tcard .ft span:first-child{white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tcard .edit{width:26px;height:26px;border-radius:8px;display:grid;place-items:center;color:var(--ink3);flex:none}.tcard .edit:hover{background:#EFEFF3;color:var(--ink)}.tcard .edit svg{width:14px;height:14px}.tcard .ft span:first-child{flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .newc{border:1.5px dashed #C8CED8;border-radius:16px;display:grid;place-items:center;align-content:center;gap:8px;color:var(--ink2);font-size:13px;font-weight:700;min-height:170px}
 .newc img{width:56px}
 .empty{margin:0 14px;padding:22px;text-align:center;color:var(--ink3);font-size:13px}
@@ -290,7 +290,7 @@ function render(){
   const foot = `<div class="foot"><button onclick="lockNow()">이 기기에서 잠그기</button></div>`;
   if (VIEW === 'list'){
     $('#main').innerHTML = `<div class="pt listpt"><div><h1>여행 목록</h1><small>최근 여행부터 보여요 · 누르면 그 여행으로 들어가요</small></div></div>
-      <div class="grid">${sorted.map(t => `<a class="card tcard" href="app.html#trip=${encodeURIComponent(t.id)}">${tripThumbSVG(t, '-g' + t.id)}<div class="ft"><span>${esc(tripCountries(t).map(c => C[c] ? C[c].n : c).join(' · ') || t.title)}</span>${dtag(t)}</div></a>`).join('')}
+      <div class="grid">${sorted.map(t => `<div class="card tcard"><a href="app.html#trip=${encodeURIComponent(t.id)}">${tripThumbSVG(t, '-g' + t.id)}</a><div class="ft"><span>${esc(tripCountries(t).map(c => C[c] ? C[c].n : c).join(' · ') || t.title)}</span>${dtag(t)}<a class="edit" href="app.html#edittrip=${encodeURIComponent(t.id)}" title="포스터·여행 정보 수정" aria-label="수정"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 20h4L19 9l-4-4L4 16z M14 6l4 4"/></svg></a></div></div>`).join('')}
         <a class="newc" href="app.html#newtrip"><img src="${IMG.i.luggage}" alt=""><span>다음 여행은 어디로?</span></a></div>${foot}`;
     return;
   }
